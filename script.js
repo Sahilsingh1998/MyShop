@@ -1,3 +1,4 @@
+window.dataLayer = window.dataLayer || [];
 document.addEventListener('DOMContentLoaded', () => {
 
     const nav = document.querySelector('nav');
@@ -99,6 +100,12 @@ if (form) {
         const btn = this.querySelector("button");
         btn.innerHTML = "Submitting...";
         btn.disabled = true;
+
+        // 🔥 GTM EVENT TRACKING (ADD THIS)
+        window.dataLayer.push({
+            event: "form_submit",
+            form_name: "contact_form"
+        });
 
         const data = {
             name: document.getElementById("name").value,
