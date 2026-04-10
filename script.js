@@ -45,3 +45,37 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 });
+
+
+document.getElementById("contactForm").addEventListener("submit", function(e) {
+    e.preventDefault();
+
+    const btn = this.querySelector("button");
+    btn.innerHTML = "Submitting...";
+    btn.disabled = true;
+
+    const data = {
+        name: document.getElementById("name").value,
+        phone: document.getElementById("phone").value,
+        email: document.getElementById("email").value,
+        message: document.getElementById("message").value
+    };
+
+    fetch("https://script.google.com/macros/s/AKfycbwRL0gWQop5u_mt-L11irlqGZbnBt_-cJynMqEJ-OwQ1ssY6csJseDa1CTAGFehw3Vl/exec", {
+        method: "POST",
+        body: JSON.stringify(data)
+    })
+    .then(res => res.json())
+    .then(response => {
+        alert("✅ Message sent successfully!");
+        document.getElementById("contactForm").reset();
+        btn.innerHTML = "Submit Inquiry";
+        btn.disabled = false;
+    })
+    .catch(error => {
+        alert("❌ Something went wrong!");
+        btn.innerHTML = "Submit Inquiry";
+        btn.disabled = false;
+        console.error(error);
+    });
+});
