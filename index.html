@@ -1,110 +1,190 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Chandan Cycle Store — Coming Soon</title>
-
-<style>
-  * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  }
-
-  body {
-    height: 100vh;
-    background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: #fff;
-    text-align: center;
-    overflow: hidden;
-  }
-
-  .container {
-    max-width: 700px;
-    padding: 40px;
-    animation: fadeIn 1.5s ease;
-  }
-
-  .logo {
-    font-size: 42px;
-    font-weight: 700;
-    letter-spacing: 1px;
-    margin-bottom: 15px;
-  }
-
-  .logo span {
-    color: #00e5ff;
-  }
-
-  h1 {
-    font-size: 48px;
-    margin-bottom: 20px;
-    font-weight: 700;
-  }
-
-  p {
-    font-size: 18px;
-    opacity: 0.9;
-    line-height: 1.6;
-    margin-bottom: 35px;
-  }
-
-  .divider {
-    width: 80px;
-    height: 4px;
-    background: #00e5ff;
-    margin: 25px auto;
-    border-radius: 2px;
-  }
-
-  .btn {
-    display: inline-block;
-    padding: 14px 28px;
-    border-radius: 30px;
-    background: #00e5ff;
-    color: #00323a;
-    font-weight: 600;
-    text-decoration: none;
-    transition: 0.3s;
-  }
-
-  .btn:hover {
-    background: #00bcd4;
-    transform: translateY(-2px);
-  }
-
-  .footer {
-    margin-top: 50px;
-    font-size: 14px;
-    opacity: 0.7;
-  }
-
-  @keyframes fadeIn {
-    from { opacity: 0; transform: translateY(20px); }
-    to { opacity: 1; transform: translateY(0); }
-  }
-</style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chandan Cycle Store | Best Bicycle Shop in Kursela, Katihar</title>
+  <meta name="description"
+    content="Looking for the best cycle store in Kursela, Katihar? Chandan Cycle Store offers premium bicycles, expert repairs, and genuine accessories. Trusted since 1993!">
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 
 <body>
-  <div class="container">
-    <div class="logo">Chandan <span>Cycle Store</span></div>
-    <div class="divider"></div>
-    <h1>We’re Coming Soon</h1>
-    <p>
-      Our website is under construction.<br>
-      We’re preparing something amazing for all cycling lovers.<br>
-      Stay tuned!
-    </p>
-    <a href="#" class="btn">Contact Us</a>
-    <div class="footer">
-      © 2026 Chandan Cycle Store. All Rights Reserved.
+
+  <nav>
+    <div class="container nav-container">
+      <a href="index.html" class="logo">Chandan<span>Cycle</span>Store</a>
+      <div class="menu-toggle"><i class="fas fa-bars"></i></div>
+      <ul class="nav-links">
+        <li><a href="index.html" class="active">Home</a></li>
+        <li><a href="./about-us.html">About Us</a></li>
+        <li><a href="./services.html">Services</a></li>
+        <li><a href="./contact.html">Contact</a></li>
+      </ul>
     </div>
-  </div>
+  </nav>
+
+  <header id="home" class="hero">
+    <div class="container fade-up">
+      <div class="hero-content">
+        <h1>Ride With Passion</h1>
+        <p>Kursela's most trusted cycle store since 1993. Premium bicycles, expert repairs, and genuine accessories.</p>
+        <a href="./services.html" class="btn btn-primary">Explore Services</a>
+      </div>
+    </div>
+  </header>
+
+  <section id="about" class="section-padding bg-light">
+    <div class="container about-layout">
+      <div class="about-content fade-up">
+        <h2 class="section-title" style="text-align: left; margin-bottom: 20px;">Serving Kursela Since 1993</h2>
+        <p>Chandan Cycle Store began as a humble family endeavor over three decades ago. Our foundation was built on a
+          simple premise: everyone deserves a reliable ride. From our roots in Kursela, Katihar, we have expanded our
+          expertise while maintaining the warm, personal touch of a family-run business.</p>
+        <p>Today, we don't just sell cycles; we build lasting relationships. Our team of expert mechanics treats every
+          repair with precision, ensuring the safety and satisfaction of our community.</p>
+
+        <div class="stats-container">
+          <div class="stat-box">
+            <h3>30+</h3>
+            <p>Years Experience</p>
+          </div>
+          <div class="stat-box">
+            <h3>10k+</h3>
+            <p>Happy Riders</p>
+          </div>
+          <div class="stat-box">
+            <h3>100%</h3>
+            <p>Quality Service</p>
+          </div>
+        </div>
+      </div>
+      <div class="about-image fade-up">
+        <img src="./assets/bycle-img-1.png"
+          alt="Cycle Shop History">
+      </div>
+    </div>
+  </section>
+
+   <section id="services" class="section-padding">
+        <div class="container fade-up">
+            <h2 class="section-title">Comprehensive Solutions</h2>
+            <div class="image-grid">
+                <div class="image-card">
+                    <img src="./assets/bike-img-2.png" alt="Sales">
+                    <div class="card-overlay">
+                        <h3>Cycle Sales</h3>
+                        <p>Mountain, Road, Hybrid, and Kids bicycles from top brands.</p>
+                    </div>
+                </div>
+                <div class="image-card">
+                    <img src="./assets/bike-img-3.png" alt="Repair">
+                    <div class="card-overlay">
+                        <h3>Repair & Service</h3>
+                        <p>Full-service maintenance, brake tuning, and deep cleaning.</p>
+                    </div>
+                </div>
+                <div class="image-card">
+                    <img src="./assets/bike-img-4.png" alt="Parts">
+                    <div class="card-overlay">
+                        <h3>Spare Parts</h3>
+                        <p>High-quality tires, tubes, chains, and derailleur gears.</p>
+                    </div>
+                </div>
+                <div class="image-card">
+                    <img src="./assets/bike-img-5.png" alt="Accessories">
+                    <div class="card-overlay">
+                        <h3>Accessories</h3>
+                        <p>Helmets, lights, locks, and comfortable seating upgrades.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+  <section id="contact" class="section-padding bg-light">
+    <div class="container fade-up">
+      <h2 class="section-title">Get In Touch</h2>
+      <div class="contact-wrap">
+        <div>
+          <h3 style="margin-bottom: 30px;">Store Information</h3>
+          <div class="info-box">
+            <i class="fas fa-map-marker-alt"></i>
+            <div>
+              <h4>Location</h4>
+              <p>Kursela, Katihar, Bihar</p>
+            </div>
+          </div>
+          <div class="info-box">
+            <i class="fas fa-phone-alt"></i>
+            <div>
+              <h4>Call Us</h4>
+              <p>+91 7782864311</p>
+            </div>
+          </div>
+          <div class="info-box">
+            <i class="fas fa-envelope"></i>
+            <div>
+              <h4>Email</h4>
+              <p>singhsahil.8340@gmail.com</p>
+            </div>
+          </div>
+        </div>
+        <div>
+          <h3 style="margin-bottom: 30px;">Send a Message</h3>
+                    <form id="contactForm">
+                        <div class="form-group">
+                            <input type="text" id="name" placeholder="Your Name" required>
+                        </div>
+                        <div class="form-group">
+                            <input type="tel" id="phone" placeholder="Phone Number" required>
+                        </div>
+                        <div class="form-group">
+                            <input type="email" id="email" placeholder="Your Email" required>
+                        </div>
+                        <div class="form-group">
+                            <textarea id="message" rows="5" placeholder="How can we help?" required></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary" style="width: 100%;">
+                            Submit Inquiry
+                        </button>
+                    </form>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-col">
+          <h4>Chandan Cycle Store</h4>
+          <p>Established in 1993, bringing the joy of cycling to Kursela, Katihar. Quality, reliability, and community
+            focus.</p>
+        </div>
+        <div class="footer-col">
+          <h4>Quick Links</h4>
+          <p><a href="./index.html">Home</a></p>
+          <p><a href="./about-us.html">About Us</a></p>
+          <p><a href="./services.html">Our Services</a></p>
+          <p><a href="./contact.html">Contact Support</a></p>
+        </div>
+        <div class="footer-col">
+          <h4>Contact Info</h4>
+          <p><i class="fas fa-phone"></i> +91 7782864311</p>
+          <p><i class="fas fa-envelope"></i> singhsahil.8340@gmail.com</p>
+          <p><i class="fas fa-map-marker-alt"></i> Kursela, Katihar, Bihar</p>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 1993 - 2026 Chandan Cycle Store. All Rights Reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
 </body>
+
 </html>
