@@ -1,4 +1,3 @@
-window.dataLayer = window.dataLayer || [];
 document.addEventListener('DOMContentLoaded', () => {
 
     const nav = document.querySelector('nav');
@@ -90,7 +89,7 @@ document.addEventListener('DOMContentLoaded', () => {
 /* =========================
    CONTACT FORM
 ========================= */
-
+window.dataLayer = window.dataLayer || [];
 const form = document.getElementById("contactForm");
 
 if (form) {
