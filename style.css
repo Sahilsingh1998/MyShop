@@ -47,7 +47,7 @@ nav.scrolled .logo, nav.scrolled .nav-links a { color: var(--dark); }
 nav.scrolled .menu-toggle { color: var(--dark); }
 
 /* Hero Section */
-.hero { height: 100vh; background: linear-gradient(rgba(15,23,42,0.6), rgba(15,23,42,0.8)), url('https://images.unsplash.com/photo-1485965120184-e220f721d03e?auto=format&fit=crop&q=80&w=1920') center/cover fixed; display: flex; align-items: center; justify-content: center; text-align: center; }
+.hero { height: 100vh; background: linear-gradient(rgba(15,23,42,0.6), rgba(15,23,42,0.8)), url('./assets/slider.png') center/cover fixed; display: flex; align-items: center; justify-content: center; text-align: center; }
 .hero-content h1 { font-size: 4.5rem; color: #fff; margin-bottom: 20px; text-transform: uppercase; letter-spacing: 2px; }
 .hero-content p { font-size: 1.2rem; color: #cbd5e1; margin-bottom: 40px; max-width: 600px; margin-inline: auto; }
 
