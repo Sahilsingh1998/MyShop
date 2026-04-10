@@ -1,43 +1,19 @@
-/* =========================
-   MAIN SCRIPT
-========================= */
-
 document.addEventListener('DOMContentLoaded', () => {
 
     const nav = document.querySelector('nav');
     const menuToggle = document.querySelector('.menu-toggle');
     const navLinks = document.querySelector('.nav-links');
-    const sections = document.querySelectorAll('section, header');
     const navItems = document.querySelectorAll('.nav-links a');
 
     /* =========================
-       STICKY NAVBAR + SCROLL SPY
+       STICKY NAVBAR
     ========================= */
     window.addEventListener('scroll', () => {
-
-        // Sticky Navbar
         if (window.scrollY > 50) {
             nav.classList.add('scrolled');
         } else {
             nav.classList.remove('scrolled');
         }
-
-        // Scroll Spy
-        let current = '';
-        sections.forEach(section => {
-            const sectionTop = section.offsetTop;
-            if (window.scrollY >= (sectionTop - 200)) {
-                current = section.getAttribute('id');
-            }
-        });
-
-        navItems.forEach(item => {
-            item.classList.remove('active');
-            if (item.getAttribute('href') === `#${current}`) {
-                item.classList.add('active');
-            }
-        });
-
     });
 
     /* =========================
@@ -46,49 +22,78 @@ document.addEventListener('DOMContentLoaded', () => {
     if (menuToggle && navLinks) {
         menuToggle.addEventListener('click', () => {
             navLinks.classList.toggle('active');
-
-            // Optional: toggle icon (☰ → ✖)
             menuToggle.classList.toggle('open');
         });
     }
 
     /* =========================
-       CLOSE MENU ON LINK CLICK
+       CLOSE MENU ON CLICK
     ========================= */
-    navItems.forEach(item => {
-        item.addEventListener('click', () => {
+    navItems.forEach(link => {
+        link.addEventListener('click', () => {
             navLinks.classList.remove('active');
             menuToggle.classList.remove('open');
         });
     });
 
     /* =========================
-       MOBILE DROPDOWN FIX (CLICK)
+       ACTIVE MENU (MULTI PAGE FIX)
+    ========================= */
+
+    const currentPage = window.location.pathname.split("/").pop() || "index.html";
+
+    navItems.forEach(link => {
+
+        let linkPath = link.getAttribute("href");
+
+        // remove "./"
+        if (linkPath) {
+            linkPath = linkPath.replace("./", "");
+        }
+
+        // reset
+        link.classList.remove("active");
+
+        // match page
+        if (linkPath === currentPage) {
+            link.classList.add("active");
+        }
+
+        // home fallback
+        if (currentPage === "" && linkPath === "index.html") {
+            link.classList.add("active");
+        }
+    });
+
+    /* =========================
+       MOBILE DROPDOWN FIX
     ========================= */
     const dropdowns = document.querySelectorAll('.dropdown');
 
     dropdowns.forEach(drop => {
         const link = drop.querySelector('a');
 
-        link.addEventListener('click', (e) => {
-            if (window.innerWidth <= 768) {
-                e.preventDefault();
-                drop.classList.toggle('active');
-            }
-        });
+        if (link) {
+            link.addEventListener('click', (e) => {
+                if (window.innerWidth <= 768) {
+                    e.preventDefault();
+                    drop.classList.toggle('active');
+                }
+            });
+        }
     });
 
 });
 
 
 /* =========================
-   CONTACT FORM SUBMIT
+   CONTACT FORM
 ========================= */
 
 const form = document.getElementById("contactForm");
 
 if (form) {
-    form.addEventListener("submit", function(e) {
+    form.addEventListener("submit", function (e) {
         e.preventDefault();
 
         const btn = this.querySelector("button");
@@ -107,17 +112,16 @@ if (form) {
             body: JSON.stringify(data)
         })
         .then(res => res.json())
-        .then(response => {
+        .then(() => {
             alert("✅ Message sent successfully!");
             form.reset();
-            btn.innerHTML = "Submit Inquiry";
-            btn.disabled = false;
         })
-        .catch(error => {
+        .catch(() => {
             alert("❌ Something went wrong!");
+        })
+        .finally(() => {
             btn.innerHTML = "Submit Inquiry";
             btn.disabled = false;
-            console.error(error);
         });
     });
 }
