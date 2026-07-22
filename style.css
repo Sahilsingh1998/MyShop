@@ -192,7 +192,7 @@ nav.scrolled .menu-toggle {
 /* Hero Section */
 .hero {
     height: 100vh;
-    background: linear-gradient(rgba(15, 23, 42, 0.6), rgba(15, 23, 42, 0.8)), url('./assets/slider.png') center/cover fixed;
+    background: linear-gradient(rgba(15, 23, 42, 0.6), rgba(15, 23, 42, 0.8)), url('./assets/slider.webp') center/cover fixed;
     display: flex;
     align-items: center;
     justify-content: center;
