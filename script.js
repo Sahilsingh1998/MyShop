@@ -118,17 +118,39 @@ if (form) {
             message: document.getElementById("message")?.value || ""
         };
 
-        fetch("https://script.google.com/macros/s/AKfycbwRL0gWQop5u_mt-L11irlqGZbnBt_-cJynMqEJ-OwQ1ssY6csJseDa1CTAGFehw3Vl/exec", {
+        const endpoint = "https://script.google.com/macros/s/AKfycbwRL0gWQop5u_mt-L11irlqGZbnBt_-cJynMqEJ-OwQ1ssY6csJseDa1CTAGFehw3Vl/exec";
+
+        fetch(endpoint, {
             method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                "Accept": "application/json"
+            },
             body: JSON.stringify(data)
         })
-        .then(res => res.json())
+        .then(async (res) => {
+            const contentType = res.headers.get("content-type") || "";
+            let payload = null;
+
+            if (contentType.includes("application/json")) {
+                payload = await res.json();
+            } else {
+                payload = await res.text();
+            }
+
+            if (!res.ok) {
+                throw new Error(payload?.message || payload || "Request failed");
+            }
+
+            return payload;
+        })
         .then(() => {
             alert("✅ Message sent successfully!");
             form.reset();
         })
-        .catch(() => {
-            alert("❌ Something went wrong!");
+        .catch((error) => {
+            console.error("Form submission failed:", error);
+            alert("❌ Something went wrong while sending your message. Please try again later.");
         })
         .finally(() => {
             btn.innerHTML = originalBtnText;

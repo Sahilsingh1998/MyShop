@@ -1,35 +1,36 @@
 # Chandan Cycle Store — Full Site Content
 
-> Premier bicycle store offering cycles, accessories, spare parts, and repair services.
+> Chandan Cycle Store is a family-rooted bicycle shop in Kursela, Katihar, known for quality bicycles, dependable repairs, genuine spare parts, and helpful customer service.
 
 ---
 
 ## About Chandan Cycle Store
-Chandan Cycle Store provides high-quality bicycles, parts, and cycling gear for riders of all levels—from toddlers learning to ride to enthusiasts looking for performance bikes.
+Chandan Cycle Store has served the local cycling community since 1993. The shop combines trusted expertise with a friendly neighborhood experience, helping riders of all ages find the right bicycle and keep it in top condition.
 
 ---
 
-## Product Categories & Offerings
+## Products and Services
 
-### 1. Bicycles
-- Kids Bicycles (Trikes, 12-inch to 20-inch wheels)
-- Mountain Bikes (MTB)
-- Gear & Speed Cycles
-- Road & Hybrid Cycles
+### Bicycles
+- Kids bicycles and beginner-friendly models
+- Mountain bikes for rough terrain
+- Road and hybrid cycles for everyday commuting
+- Gear cycles for performance-focused riders
 
-### 2. Accessories & Gear
-- Cycling Helmets & Protective Gear
-- Bike Locks, Lights, & Horns
-- Water Bottles & Mounts
-- Pumps, Toolkits, & Maintenance Equipment
+### Repair and Maintenance
+- Routine servicing and tune-ups
+- Brake, chain, and derailleur adjustments
+- Deep cleaning and safety checks
 
-### 3. Spare Parts & Repairs
-- Tubes & Tires
-- Brakes, Chains, & Pedals
-- On-site bike servicing and maintenance options
+### Accessories and Spare Parts
+- Helmets, locks, lights, and safety gear
+- Tires, tubes, chains, pedals, and brake components
+- Essential tools and maintenance accessories
 
 ---
 
-## Contact & Store Information
+## Contact and Store Information
 - Website: https://chandancyclestore.store/
-- Contact Page: https://chandancyclestore.store/pages/contact
+- Address: Main Road, Near Chowk, Kursela, Katihar, Bihar 854112
+- Phone: +91 7782864311
+- Email: singhsahil.8340@gmail.com

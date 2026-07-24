@@ -43,9 +43,15 @@ ul {
 }
 
 /* Rendering Optimizations */
-#about, #services, #contact, footer {
+.section-padding {
     content-visibility: auto;
     contain-intrinsic-size: 1px 800px;
+}
+
+.image-card,
+.stat-box,
+.info-box {
+    will-change: transform;
 }
 
 /* Typography & Utilities */
@@ -103,10 +109,11 @@ nav {
     position: fixed;
     width: 100%;
     top: 0;
-    padding: 25px 0;
+    padding: 20px 0;
     z-index: 1000;
-    transition: padding 0.3s ease, background 0.3s ease;
-    background: transparent;
+    transition: padding 0.3s ease, background 0.3s ease, box-shadow 0.3s ease;
+    background: rgba(15, 23, 42, 0.96);
+    box-shadow: 0 8px 24px rgba(15, 23, 42, 0.16);
 }
 
 nav.scrolled {
@@ -140,6 +147,7 @@ nav.scrolled .nav-links a {
 .nav-links {
     display: flex;
     gap: 35px;
+    align-items: center;
 }
 
 .nav-links a {
@@ -179,6 +187,54 @@ nav.scrolled .nav-links a {
 
 nav.scrolled .menu-toggle {
     color: var(--dark);
+}
+
+/* Page Header */
+.page-header {
+    min-height: 320px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 140px 20px 80px;
+    background-size: cover;
+    background-position: center;
+    color: var(--white);
+    position: relative;
+}
+
+.page-header .container {
+    position: relative;
+    z-index: 1;
+}
+
+.page-header h1 {
+    color: var(--white);
+    font-size: 2.8rem;
+    margin-bottom: 15px;
+}
+
+.breadcrumb {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    flex-wrap: wrap;
+    color: #cbd5e1;
+}
+
+.breadcrumb li {
+    display: inline-flex;
+    align-items: center;
+}
+
+.breadcrumb li + li::before {
+    content: '/';
+    margin-right: 10px;
+    color: #94a3b8;
+}
+
+.breadcrumb a {
+    color: var(--white);
 }
 
 /* Hero Section */
@@ -476,12 +532,13 @@ footer {
         top: 100%;
         left: 0;
         width: 100%;
-        background: var(--white);
+        background: rgba(255, 255, 255, 0.98);
         flex-direction: column;
         padding: 20px 0;
         gap: 0;
         clip-path: polygon(0 0, 100% 0, 100% 0, 0 0);
         transition: clip-path 0.4s ease;
+        box-shadow: 0 12px 24px rgba(15, 23, 42, 0.08);
     }
 
     .nav-links.active {

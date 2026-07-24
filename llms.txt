@@ -1,8 +1,14 @@
 # Chandan Cycle Store
-> Premier bicycle store offering cycles, accessories, spare parts, and repair services.
+> Chandan Cycle Store is a trusted bicycle shop in Kursela, Katihar, offering premium bicycles, repair services, spare parts, and accessories since 1993.
 
-## Core Pages
-- [Home](https://chandancyclestore.store/): Explore our latest range of bicycles and store updates.
-- [Bicycles](https://chandancyclestore.store/collections/bicycles): Mountain bikes, road bikes, gear cycles, and kids' cycles.
-- [Accessories & Parts](https://chandancyclestore.store/collections/accessories): Helmets, pumps, tires, tubes, and essential cycling gear.
-- [Contact & Support](https://chandancyclestore.store/pages/contact): Store address, phone number, operating hours, and customer care.
+## What we offer
+- Bicycle sales for kids, mountain, road, hybrid, and gear cycles
+- Expert repair and maintenance services
+- Genuine spare parts, tires, tubes, chains, and brake components
+- Accessories such as helmets, lights, locks, and safety gear
+
+## Contact
+- Address: Main Road, Near Chowk, Kursela, Katihar, Bihar 854112
+- Phone: +91 7782864311
+- Email: singhsahil.8340@gmail.com
+- Website: https://chandancyclestore.store/
