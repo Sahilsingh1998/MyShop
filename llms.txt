@@ -1,0 +1,8 @@
+# Chandan Cycle Store
+> Premier bicycle store offering cycles, accessories, spare parts, and repair services.
+
+## Core Pages
+- [Home](https://chandancyclestore.store/): Explore our latest range of bicycles and store updates.
+- [Bicycles](https://chandancyclestore.store/collections/bicycles): Mountain bikes, road bikes, gear cycles, and kids' cycles.
+- [Accessories & Parts](https://chandancyclestore.store/collections/accessories): Helmets, pumps, tires, tubes, and essential cycling gear.
+- [Contact & Support](https://chandancyclestore.store/pages/contact): Store address, phone number, operating hours, and customer care.
