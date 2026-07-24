@@ -1,0 +1,35 @@
+# Chandan Cycle Store — Full Site Content
+
+> Premier bicycle store offering cycles, accessories, spare parts, and repair services.
+
+---
+
+## About Chandan Cycle Store
+Chandan Cycle Store provides high-quality bicycles, parts, and cycling gear for riders of all levels—from toddlers learning to ride to enthusiasts looking for performance bikes.
+
+---
+
+## Product Categories & Offerings
+
+### 1. Bicycles
+- Kids Bicycles (Trikes, 12-inch to 20-inch wheels)
+- Mountain Bikes (MTB)
+- Gear & Speed Cycles
+- Road & Hybrid Cycles
+
+### 2. Accessories & Gear
+- Cycling Helmets & Protective Gear
+- Bike Locks, Lights, & Horns
+- Water Bottles & Mounts
+- Pumps, Toolkits, & Maintenance Equipment
+
+### 3. Spare Parts & Repairs
+- Tubes & Tires
+- Brakes, Chains, & Pedals
+- On-site bike servicing and maintenance options
+
+---
+
+## Contact & Store Information
+- Website: https://chandancyclestore.store/
+- Contact Page: https://chandancyclestore.store/pages/contact
