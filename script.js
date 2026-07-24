@@ -6,15 +6,22 @@ document.addEventListener('DOMContentLoaded', () => {
     const navItems = document.querySelectorAll('.nav-links a');
 
     /* =========================
-       STICKY NAVBAR
+       STICKY NAVBAR (Throttled for performance)
     ========================= */
+    let isTicking = false;
     window.addEventListener('scroll', () => {
-        if (window.scrollY > 50) {
-            nav.classList.add('scrolled');
-        } else {
-            nav.classList.remove('scrolled');
+        if (!isTicking) {
+            window.requestAnimationFrame(() => {
+                if (window.scrollY > 50) {
+                    nav?.classList.add('scrolled');
+                } else {
+                    nav?.classList.remove('scrolled');
+                }
+                isTicking = false;
+            });
+            isTicking = true;
         }
-    });
+    }, { passive: true });
 
     /* =========================
        MOBILE MENU TOGGLE
@@ -31,36 +38,32 @@ document.addEventListener('DOMContentLoaded', () => {
     ========================= */
     navItems.forEach(link => {
         link.addEventListener('click', () => {
-            navLinks.classList.remove('active');
-            menuToggle.classList.remove('open');
+            if (navLinks && menuToggle) {
+                navLinks.classList.remove('active');
+                menuToggle.classList.remove('open');
+            }
         });
     });
 
     /* =========================
        ACTIVE MENU (MULTI PAGE FIX)
     ========================= */
-
     const currentPage = window.location.pathname.split("/").pop() || "index.html";
 
     navItems.forEach(link => {
-
         let linkPath = link.getAttribute("href");
 
-        // remove "./"
         if (linkPath) {
             linkPath = linkPath.replace("./", "");
         }
 
-        // reset
         link.classList.remove("active");
 
-        // match page
         if (linkPath === currentPage) {
             link.classList.add("active");
         }
 
-        // home fallback
-        if (currentPage === "" && linkPath === "index.html") {
+        if ((currentPage === "" || currentPage === "/") && linkPath === "index.html") {
             link.classList.add("active");
         }
     });
@@ -85,9 +88,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
 });
 
-
 /* =========================
-   CONTACT FORM
+   CONTACT FORM SUBMISSION
 ========================= */
 window.dataLayer = window.dataLayer || [];
 const form = document.getElementById("contactForm");
@@ -97,20 +99,23 @@ if (form) {
         e.preventDefault();
 
         const btn = this.querySelector("button");
+        if (!btn) return;
+
+        const originalBtnText = btn.innerHTML;
         btn.innerHTML = "Submitting...";
         btn.disabled = true;
 
-        // 🔥 GTM EVENT TRACKING (ADD THIS)
+        // GTM Event Tracking
         window.dataLayer.push({
             event: "form_submit",
             form_name: "contact_form"
         });
 
         const data = {
-            name: document.getElementById("name").value,
-            phone: document.getElementById("phone").value,
-            email: document.getElementById("email").value,
-            message: document.getElementById("message").value
+            name: document.getElementById("name")?.value || "",
+            phone: document.getElementById("phone")?.value || "",
+            email: document.getElementById("email")?.value || "",
+            message: document.getElementById("message")?.value || ""
         };
 
         fetch("https://script.google.com/macros/s/AKfycbwRL0gWQop5u_mt-L11irlqGZbnBt_-cJynMqEJ-OwQ1ssY6csJseDa1CTAGFehw3Vl/exec", {
@@ -126,38 +131,8 @@ if (form) {
             alert("❌ Something went wrong!");
         })
         .finally(() => {
-            btn.innerHTML = "Submit Inquiry";
+            btn.innerHTML = originalBtnText;
             btn.disabled = false;
         });
     });
 }
-
-// // Disable Right Click
-// document.addEventListener('contextmenu', function (e) {
-//     e.preventDefault();
-// });
-
-// document.addEventListener('dragstart', function (e) {
-//     if (e.target.tagName === 'IMG') {
-//         e.preventDefault();
-//     }
-// });
-
-// document.addEventListener('keydown', function (e) {
-//     // Disable F12
-//     if (e.key === "F12") {
-//         e.preventDefault();
-//     }
-//     if (e.ctrlKey && e.shiftKey && e.key === 'I') {
-//         e.preventDefault();
-//     }
-//     if (e.ctrlKey && e.shiftKey && e.key === 'J') {
-//         e.preventDefault();
-//     }
-//     if (e.ctrlKey && e.key === 'u') {
-//         e.preventDefault();
-//     }
-//     if (e.ctrlKey && e.key === 's') {
-//         e.preventDefault();
-//     }
-// });
