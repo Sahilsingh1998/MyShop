@@ -571,15 +571,6 @@ footer {
     }
 }
 
-/* Font Awesome font-display: swap */
-/* Ensure your Font Awesome @font-face rule includes font-display: swap; */
-/* If Font Awesome is loaded via a CDN, check their documentation for options to add this. */
-@font-face {
-    font-family: 'Font Awesome 5 Free'; /* Adjust font-family name if different */
-    font-weight: 900; /* Adjust font-weight if different */
-    font-display: swap; /* Crucial for render blocking */
-    src: url('/assets/fonts/fa-solid-900.woff2') format('woff2'); /* Adjust path to your font file */
-}
 @media (max-width: 576px) {
     .container { padding: 0 15px; }
     .section-padding { padding: 50px 0; }
