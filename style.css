@@ -3,7 +3,7 @@
     --primary-dark: #1d4ed8;
     --dark: #0f172a;
     --light: #f8fafc;
-    --gray: #64748b;
+    --gray: #475569;
     --white: #ffffff;
     --shadow: 0 20px 40px rgba(0, 0, 0, 0.08);
     --transition: transform 0.3s ease, opacity 0.3s ease, background-color 0.3s ease;
@@ -163,15 +163,16 @@ nav.scrolled .nav-links a {
     position: absolute;
     bottom: -5px;
     left: 0;
-    width: 0;
+    transform: scaleX(0);
+    transform-origin: left;
     height: 2px;
     background: var(--primary);
-    transition: width 0.3s ease;
+    transition: transform 0.3s ease;
 }
 
 .nav-links a:hover::after,
 .nav-links a.active::after {
-    width: 100%;
+    transform: scaleX(1);
 }
 
 .nav-links a.active {
@@ -219,7 +220,7 @@ nav.scrolled .menu-toggle {
     justify-content: center;
     gap: 10px;
     flex-wrap: wrap;
-    color: #cbd5e1;
+    color: #e2e8f0;
 }
 
 .breadcrumb li {
@@ -230,11 +231,12 @@ nav.scrolled .menu-toggle {
 .breadcrumb li + li::before {
     content: '/';
     margin-right: 10px;
-    color: #94a3b8;
+    color: #94a3b8; /* This color is decorative, but let's keep it consistent */
 }
 
 .breadcrumb a {
     color: var(--white);
+    text-decoration: underline;
 }
 
 /* Hero Section */
@@ -274,7 +276,7 @@ nav.scrolled .menu-toggle {
 
 .hero-content p {
     font-size: 1.2rem;
-    color: #cbd5e1;
+    color: #e2e8f0;
     margin-bottom: 40px;
     max-width: 600px;
     margin-inline: auto;
@@ -362,7 +364,7 @@ nav.scrolled .menu-toggle {
 }
 
 .card-overlay p {
-    color: #cbd5e1;
+    color: #e2e8f0;
     font-size: 0.9rem;
     opacity: 0;
     transform: translateY(20px);
@@ -446,21 +448,21 @@ footer {
 
 .footer-col p,
 .footer-col a {
-    color: #94a3b8;
-    transition: color 0.3s ease, padding 0.3s ease;
+    color: #cbd5e1;
+    transition: color 0.3s ease, transform 0.3s ease;
     line-height: 2;
 }
 
 .footer-col a:hover {
     color: var(--primary);
-    padding-left: 5px;
+    transform: translateX(5px);
 }
 
 .footer-bottom {
     text-align: center;
     border-top: 1px solid rgba(255, 255, 255, 0.1);
     padding-top: 30px;
-    color: #64748b;
+    color: var(--gray);
 }
 
 /* Dropdown Menu Styles */
@@ -569,6 +571,15 @@ footer {
     }
 }
 
+/* Font Awesome font-display: swap */
+/* Ensure your Font Awesome @font-face rule includes font-display: swap; */
+/* If Font Awesome is loaded via a CDN, check their documentation for options to add this. */
+@font-face {
+    font-family: 'Font Awesome 5 Free'; /* Adjust font-family name if different */
+    font-weight: 900; /* Adjust font-weight if different */
+    font-display: swap; /* Crucial for render blocking */
+    src: url('/assets/fonts/fa-solid-900.woff2') format('woff2'); /* Adjust path to your font file */
+}
 @media (max-width: 576px) {
     .container { padding: 0 15px; }
     .section-padding { padding: 50px 0; }
