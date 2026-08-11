@@ -13,7 +13,7 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: 'Poppins', sans-serif;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
 }
 
 html {
@@ -23,7 +23,7 @@ html {
 body {
     background: var(--white);
     color: var(--dark);
-    line-height: 1.7;
+    line-height: 1.6;
     overflow-x: hidden;
 }
 
@@ -48,10 +48,15 @@ ul {
     contain-intrinsic-size: 1px 800px;
 }
 
-.image-card,
-.stat-box,
-.info-box {
-    will-change: transform;
+.cta-box{
+    background: #0f172a;
+    color: var(--white);
+    padding: 30px;
+    border-radius: 20px;
+    box-shadow: var(--shadow);
+}
+.cta-box h2{
+    color: var(--white);
 }
 
 /* Typography & Utilities */
@@ -62,6 +67,16 @@ h1, h2, h3, h4 {
 
 .text-center { text-align: center; }
 .section-padding { padding: 100px 0; }
+.visually-hidden {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    margin: -1px;
+    padding: 0;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    border: 0;
+}
 .bg-light { background-color: var(--light); }
 
 .section-title {
@@ -181,13 +196,20 @@ nav.scrolled .nav-links a {
 
 .menu-toggle {
     display: none;
-    color: var(--white);
     font-size: 1.5rem;
     cursor: pointer;
+    background: none;
+    border: none;
+    color: var(--white);
+    padding: 5px;
 }
 
 nav.scrolled .menu-toggle {
     color: var(--dark);
+}
+.menu-toggle:focus-visible {
+    outline: 2px solid var(--primary);
+    outline-offset: 2px;
 }
 
 /* Page Header */
@@ -315,6 +337,10 @@ nav.scrolled .menu-toggle {
     border: 1px solid #e2e8f0;
 }
 
+.stat-box:hover {
+    transform: translateY(-5px);
+    transition: var(--transition);
+}
 .stat-box h3 {
     color: var(--primary);
     font-size: 2rem;
@@ -333,6 +359,7 @@ nav.scrolled .menu-toggle {
     position: relative;
     height: 350px;
     cursor: pointer;
+    will-change: transform;
     box-shadow: var(--shadow);
 }
 
@@ -398,6 +425,10 @@ nav.scrolled .menu-toggle {
     gap: 20px;
 }
 
+.info-box:hover {
+    transform: translateY(-5px);
+    transition: var(--transition);
+}
 .info-box i {
     font-size: 2rem;
     color: var(--primary);
@@ -521,7 +552,7 @@ footer {
     .hero-content h1 { font-size: 3.2rem; letter-spacing: 1px; }
     .hero-content p { font-size: 1rem; }
     .section-title { font-size: 2rem; }
-    .about-layout { gap: 40px; }
+    .about-layout { grid-template-columns: 1fr; gap: 40px; }
     .stats-container { flex-direction: column; }
     .contact-wrap { padding: 25px; }
 }
@@ -569,6 +600,10 @@ footer {
     .dropdown:hover .dropdown-menu {
         display: flex;
     }
+
+    .dropdown.active .dropdown-menu {
+        display: flex;
+    }
 }
 
 @media (max-width: 576px) {
@@ -582,7 +617,7 @@ footer {
 
     .hero-content h1 {
         font-size: 2.2rem;
-        line-line: 1.3;
+        line-height: 1.3;
     }
 
     .hero-content p {
@@ -609,4 +644,96 @@ footer {
     .hero-content h1 { font-size: 1.8rem; }
     .section-title { font-size: 1.6rem; }
     .btn { width: 100%; text-align: center; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+        transition: none !important;
+        animation: none !important;
+    }
+}
+
+/* =========================
+   STICKY CALL + WHATSAPP
+========================= */
+
+.contact-sticky-buttons {
+    position: fixed;
+    right: 20px;
+    bottom: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    z-index: 9999;
+}
+
+.contact-sticky-buttons a {
+    width: 58px;
+    height: 58px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    color: #fff;
+    text-decoration: none;
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.25);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.contact-sticky-buttons a:hover {
+    transform: scale(1.08);
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.3);
+}
+
+.sticky-call {
+    background: #2563eb;
+}
+
+.sticky-whatsapp {
+    background: #25D366;
+}
+
+.contact-sticky-buttons i {
+    font-size: 28px;
+}
+
+.contact-sticky-buttons span {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+    .contact-sticky-buttons {
+        right: 12px;
+        bottom: 15px;
+        gap: 8px;
+    }
+
+    .contact-sticky-buttons a {
+        width: 54px;
+        height: 54px;
+    }
+
+    .contact-sticky-buttons i {
+        font-size: 25px;
+    }
+}
+
+/* Respect reduced motion */
+@media (prefers-reduced-motion: reduce) {
+    .contact-sticky-buttons a {
+        transition: none;
+    }
+
+    .contact-sticky-buttons a:hover {
+        transform: none;
+    }
 }
