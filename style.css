@@ -711,8 +711,10 @@ p{margin:0;}
   .nav{display:none;}
   .hamburger{display:flex;}
   .hero__inner{grid-template-columns:1fr;}
-  .hero__visual{order:-1;max-width:360px;margin:0 auto;}
+  .hero__visual{order:-1;max-width:300px;margin:0 auto;}
   .hero__spokes{opacity:.05;}
+  .hero__ring{display:none;}
+  .hero__frame{width:100%;}
   .exp-grid{grid-template-columns:1fr;}
   .contact-grid{grid-template-columns:1fr;}
   .footer__inner{grid-template-columns:1fr 1fr;}
@@ -731,4 +733,8 @@ p{margin:0;}
   .footer__inner{grid-template-columns:1fr;}
   .field--choice{flex-direction:column;align-items:flex-start;gap:8px;}
   .mobile-menu a{font-size:1.8rem;}
+  .back-to-top{width:42px;height:42px;right:16px;bottom:16px;}
+  .footer__bottom{padding-bottom:64px;}
+  .exp-card:last-child{padding-bottom:64px;}
+
 }
