@@ -1,204 +1,246 @@
-document.addEventListener('DOMContentLoaded', () => {
+/* =========================================================
+   CHANDAN CYCLE STORE — script.js
+   Vanilla JS only. No dependencies.
+   ========================================================= */
+(function () {
+  "use strict";
 
-    const nav = document.querySelector('nav');
-    const menuToggle = document.querySelector('.menu-toggle'); // This is a <button> now
-    const navLinks = document.querySelector('.nav-links'); // This is the <ul>
-    const navItems = document.querySelectorAll('.nav-links a');
-    
-    /* =========================
-       STICKY NAVBAR (Throttled for performance)
-    ========================= */
-    let isTicking = false;
-    window.addEventListener('scroll', () => {
-        if (!isTicking) {
-            window.requestAnimationFrame(() => {
-                if (window.scrollY > 50) {
-                    nav?.classList.add('scrolled');
-                } else {
-                    nav?.classList.remove('scrolled');
-                }
-                isTicking = false;
-            });
-            isTicking = true;
-        }
-    }, { passive: true });
+  /* ---------- Back to top (declared early: referenced by onScroll below) ---------- */
+  var backToTop = document.getElementById("back-to-top");
+  function toggleBackToTop() {
+    if (!backToTop) return;
+    if (window.scrollY > 700) {
+      backToTop.classList.add("is-visible");
+    } else {
+      backToTop.classList.remove("is-visible");
+    }
+  }
+  if (backToTop) {
+    backToTop.addEventListener("click", function () {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    });
+  }
 
-    /* =========================
-       MOBILE MENU TOGGLE
-    ========================= */
-    if (menuToggle && navLinks) {
-        menuToggle.addEventListener('click', () => {
-            navLinks.classList.toggle('active');
-            const isExpanded = navLinks.classList.contains('active');
-            menuToggle.setAttribute('aria-expanded', isExpanded);
-            menuToggle.setAttribute('aria-label', isExpanded ? 'Close navigation' : 'Open navigation');
+  /* ---------- Navbar scroll state ---------- */
+  var navbar = document.getElementById("navbar");
+  function onScroll() {
+    if (window.scrollY > 30) {
+      navbar.classList.add("is-scrolled");
+    } else {
+      navbar.classList.remove("is-scrolled");
+    }
+    toggleBackToTop();
+  }
+  window.addEventListener("scroll", onScroll, { passive: true });
+  onScroll();
+
+  /* ---------- Mobile menu ---------- */
+  var hamburger = document.getElementById("hamburger");
+  var mobileMenu = document.getElementById("mobile-menu");
+
+  function openMenu() {
+    mobileMenu.classList.add("is-open");
+    hamburger.setAttribute("aria-expanded", "true");
+    hamburger.setAttribute("aria-label", "Close menu");
+    document.body.style.overflow = "hidden";
+  }
+  function closeMenu() {
+    mobileMenu.classList.remove("is-open");
+    hamburger.setAttribute("aria-expanded", "false");
+    hamburger.setAttribute("aria-label", "Open menu");
+    document.body.style.overflow = "";
+  }
+  hamburger.addEventListener("click", function () {
+    var isOpen = mobileMenu.classList.contains("is-open");
+    isOpen ? closeMenu() : openMenu();
+  });
+  document.querySelectorAll("[data-mobile]").forEach(function (link) {
+    link.addEventListener("click", closeMenu);
+  });
+  document.addEventListener("keydown", function (e) {
+    if (e.key === "Escape") closeMenu();
+  });
+
+  /* ---------- Smooth scroll w/ sticky-header offset ---------- */
+  var headerOffset = 90;
+  document.querySelectorAll('a[href^="#"]').forEach(function (link) {
+    link.addEventListener("click", function (e) {
+      var id = this.getAttribute("href");
+      if (id.length < 2) return;
+      var target = document.querySelector(id);
+      if (!target) return;
+      e.preventDefault();
+      var top = target.getBoundingClientRect().top + window.pageYOffset - headerOffset;
+      window.scrollTo({ top: top, behavior: "smooth" });
+      history.pushState(null, "", id);
+    });
+  });
+
+  /* ---------- Scroll reveal ---------- */
+  var revealEls = document.querySelectorAll(".reveal");
+  if ("IntersectionObserver" in window) {
+    var revealObserver = new IntersectionObserver(
+      function (entries) {
+        entries.forEach(function (entry) {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("is-visible");
+            revealObserver.unobserve(entry.target);
+          }
         });
+      },
+      { threshold: 0.15, rootMargin: "0px 0px -60px 0px" }
+    );
+    revealEls.forEach(function (el) { revealObserver.observe(el); });
+  } else {
+    revealEls.forEach(function (el) { el.classList.add("is-visible"); });
+  }
+
+  /* ---------- Animated stat counters ---------- */
+  var statEls = document.querySelectorAll(".stat[data-count]");
+  function animateCount(el) {
+    var target = parseInt(el.getAttribute("data-count"), 10);
+    var valueEl = el.querySelector(".stat__value");
+    var duration = 1400;
+    var start = null;
+
+    function step(timestamp) {
+      if (!start) start = timestamp;
+      var progress = Math.min((timestamp - start) / duration, 1);
+      var eased = 1 - Math.pow(1 - progress, 3);
+      valueEl.textContent = Math.round(eased * target);
+      if (progress < 1) {
+        window.requestAnimationFrame(step);
+      } else {
+        valueEl.textContent = target;
+      }
+    }
+    window.requestAnimationFrame(step);
+  }
+
+  if ("IntersectionObserver" in window && statEls.length) {
+    var statObserver = new IntersectionObserver(
+      function (entries) {
+        entries.forEach(function (entry) {
+          if (entry.isIntersecting) {
+            animateCount(entry.target);
+            statObserver.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.4 }
+    );
+    statEls.forEach(function (el) { statObserver.observe(el); });
+  }
+
+  /* ---------- Active nav-section indicator ---------- */
+  var sections = ["home", "bikes", "services", "about", "contact"]
+    .map(function (id) { return document.getElementById(id); })
+    .filter(Boolean);
+  var navLinks = document.querySelectorAll(".nav-link[data-nav]");
+
+  function setActiveLink() {
+    var scrollPos = window.scrollY + headerOffset + 10;
+    var current = sections[0];
+    sections.forEach(function (sec) {
+      if (sec.offsetTop <= scrollPos) current = sec;
+    });
+    navLinks.forEach(function (link) {
+      var match = link.getAttribute("href") === "#" + current.id;
+      link.classList.toggle("is-active", match);
+    });
+  }
+  window.addEventListener("scroll", setActiveLink, { passive: true });
+  setActiveLink();
+
+  /* ---------- Contact form ---------- */
+  var form = document.getElementById("enquiry-form");
+  var statusEl = document.getElementById("form-status");
+  var STORE_PHONE = "917782864311";
+  var STORE_EMAIL = "info@chandancyclestore.store";
+
+  function setError(fieldId, message) {
+    var field = document.getElementById(fieldId);
+    var wrap = field.closest(".field");
+    var errorEl = document.getElementById("err-" + fieldId.replace("f-", ""));
+    if (message) {
+      wrap.classList.add("has-error");
+      errorEl.textContent = message;
+    } else {
+      wrap.classList.remove("has-error");
+      errorEl.textContent = "";
+    }
+  }
+
+  function validate(data) {
+    var valid = true;
+
+    if (!data.name.trim()) {
+      setError("f-name", "Please enter your name.");
+      valid = false;
+    } else {
+      setError("f-name", "");
     }
 
-    /* =========================
-       CLOSE MOBILE MENU ON LINK CLICK
-    ========================= */
-    navItems.forEach(link => {
-        link.addEventListener('click', () => {
-            if (navLinks && navLinks.classList.contains('active')) {
-                navLinks.classList.remove('active');
-                menuToggle.setAttribute('aria-expanded', 'false');
-                menuToggle.setAttribute('aria-label', 'Open navigation');
-            }
-        });
-    });
-
-    /* =========================
-       ACTIVE MENU (MULTI PAGE FIX)
-    ========================= */
-    const currentPage = window.location.pathname.split('/').pop() || 'index.html';
-
-    navItems.forEach(link => {
-        const linkPath = link.getAttribute('href').replace('./', '');
-        link.classList.remove('active');
-        if (linkPath === currentPage) {
-            link.classList.add('active');
-        // Handle root path for index.html
-        } else if ((currentPage === '' || currentPage === 'index.html') && linkPath === 'index.html') {
-            link.classList.add("active");
-        }
-    });
-
-    /* =========================
-       MOBILE DROPDOWN FIX
-    ========================= */
-    const dropdowns = document.querySelectorAll('.dropdown');
-
-    dropdowns.forEach(drop => {
-        const link = drop.querySelector('a');
-
-        if (link) {
-            link.addEventListener('click', (e) => {
-                if (window.innerWidth <= 768) {
-                    e.preventDefault();
-                    drop.classList.toggle('active');
-                }
-            });
-        }
-    });
-
-    /* =========================
-       UPDATE FOOTER YEAR
-    ========================= */
-    const yearSpan = document.getElementById('current-year');
-    if (yearSpan) {
-        yearSpan.textContent = new Date().getFullYear();
+    var phoneDigits = data.phone.replace(/\D/g, "");
+    if (phoneDigits.length < 10) {
+      setError("f-phone", "Enter a valid phone number.");
+      valid = false;
+    } else {
+      setError("f-phone", "");
     }
 
-    /* =========================
-       CONTACT FORM SUBMISSION
-    ========================= */
-    const contactForm = document.getElementById("contactForm");
-    const formStatus = document.getElementById("formStatus");
-
-    if (contactForm && formStatus) {
-        contactForm.addEventListener("submit", function (e) {
-            e.preventDefault();
-
-            const btn = this.querySelector("button[type='submit']");
-            if (!btn) return;
-
-            const originalBtnText = btn.innerHTML;
-            btn.innerHTML = "Submitting...";
-            btn.disabled = true;
-            formStatus.textContent = "";
-            formStatus.style.color = "";
-
-            // GTM Event Tracking
-            window.dataLayer = window.dataLayer || [];
-            window.dataLayer.push({
-                event: "form_submit",
-                form_name: "contact_form"
-            });
-
-            const data = {
-                name: document.getElementById("name")?.value || "",
-                phone: document.getElementById("phone")?.value || "",
-                email: document.getElementById("email")?.value || "",
-                message: document.getElementById("message")?.value || ""
-            };
-
-            const endpoint = "https://script.google.com/macros/s/AKfycbwRL0gWQop5u_mt-L11irlqGZbnBt_-cJynMqEJ-OwQ1ssY6csJseDa1CTAGFehw3Vl/exec";
-
-            fetch(endpoint, {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                    "Accept": "application/json"
-                },
-                body: JSON.stringify(data)
-            })
-            .then(res => {
-                if (!res.ok) {
-                    // Try to get error message from response, otherwise use a generic one
-                    return res.json().catch(() => res.text()).then(errorPayload => {
-                        const errorMessage = typeof errorPayload === 'object' ? errorPayload.message : errorPayload;
-                        throw new Error(errorMessage || "Request failed");
-                    });
-                }
-                return res.json();
-            })
-            .then(() => {
-                formStatus.textContent = "✅ Message sent successfully!";
-                formStatus.style.color = "green";
-                contactForm.reset();
-            })
-            .catch((error) => {
-                console.error("Form submission failed:", error);
-                formStatus.textContent = "❌ Something went wrong. Please try again later.";
-                formStatus.style.color = "red";
-            })
-            .finally(() => {
-                btn.innerHTML = originalBtnText;
-                btn.disabled = false;
-                // Clear the message after a few seconds
-                setTimeout(() => {
-                    formStatus.textContent = "";
-                }, 6000);
-            });
-        });
+    if (data.email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(data.email)) {
+      setError("f-email", "Enter a valid email address, or leave it blank.");
+      valid = false;
+    } else {
+      setError("f-email", "");
     }
-});
 
+    if (!data.message.trim()) {
+      setError("f-message", "Tell us a little about what you need.");
+      valid = false;
+    } else {
+      setError("f-message", "");
+    }
 
-/* =========================
-   STICKY CALL + WHATSAPP BUTTONS
-========================= */
+    return valid;
+  }
 
-const businessPhone = "917782864311";
-const whatsappMessage =
-    "Hello Chandan Cycle Store, I would like to know about your cycles and services.";
+  form.addEventListener("submit", function (e) {
+    e.preventDefault();
 
-if (!document.querySelector(".contact-sticky-buttons")) {
-    const stickyButtons = document.createElement("div");
-    stickyButtons.className = "contact-sticky-buttons";
+    var data = {
+      name: form.name.value,
+      phone: form.phone.value,
+      email: form.email.value,
+      message: form.message.value,
+      channel: form.channel.value
+    };
 
-    stickyButtons.innerHTML = `
-        <a
-            class="sticky-call"
-            href="tel:+${businessPhone}"
-            aria-label="Call Chandan Cycle Store"
-            title="Call Chandan Cycle Store">
-            <i class="fas fa-phone" aria-hidden="true"></i>
-            <span>Call Now</span>
-        </a>
+    if (!validate(data)) {
+      statusEl.textContent = "Please fix the highlighted fields and try again.";
+      statusEl.className = "form-status is-error";
+      return;
+    }
 
-        <a
-            class="sticky-whatsapp"
-            href="https://wa.me/${businessPhone}?text=${encodeURIComponent(whatsappMessage)}"
-            target="_blank"
-            rel="noopener noreferrer"
-            aria-label="Chat with Chandan Cycle Store on WhatsApp"
-            title="Chat with us on WhatsApp">
-            <i class="fab fa-whatsapp" aria-hidden="true"></i>
-            <span>WhatsApp</span>
-        </a>
-    `;
+    var summary =
+      "Enquiry from Chandan Cycle Store website%0A" +
+      "Name: " + encodeURIComponent(data.name) + "%0A" +
+      "Phone: " + encodeURIComponent(data.phone) + "%0A" +
+      (data.email ? "Email: " + encodeURIComponent(data.email) + "%0A" : "") +
+      "Message: " + encodeURIComponent(data.message);
 
-    document.body.appendChild(stickyButtons);
-}
+    if (data.channel === "email") {
+      var subject = encodeURIComponent("Enquiry from website — " + data.name);
+      window.location.href =
+        "mailto:" + STORE_EMAIL + "?subject=" + subject + "&body=" + summary;
+    } else {
+      window.open("https://wa.me/" + STORE_PHONE + "?text=" + summary, "_blank", "noopener");
+    }
+
+    statusEl.textContent = "Thanks! Your enquiry is ready to send.";
+    statusEl.className = "form-status is-success";
+    form.reset();
+  });
+
+})();
