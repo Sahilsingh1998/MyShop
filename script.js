@@ -156,7 +156,7 @@
   var form = document.getElementById("enquiry-form");
   var statusEl = document.getElementById("form-status");
   var STORE_PHONE = "917782864311";
-  var STORE_EMAIL = "info@chandancyclestore.store";
+  var STORE_EMAIL = "singhsahil.8340@gmail.com";
 
   function setError(fieldId, message) {
     var field = document.getElementById(fieldId);
